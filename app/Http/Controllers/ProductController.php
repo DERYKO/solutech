@@ -42,33 +42,39 @@ class ProductController extends Controller
             'description' => ['required'],
             'quantity' => ['required']
         ]);
-        $product = Product::create([
+        Product::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
             'quantity' => $request->input('quantity')
         ]);
-        return $this->response->item($product, $this->transformer);
+        $products = Product::paginate($request->input('per_page', 10));
+        return $this->response->paginator($products, $this->transformer);
     }
 
     public function update(Request $request, $id)
     {
         $product = Product::findOrfail($id);
         $product->update($request->only(['name', 'description', 'quantity']));
-        return $this->response->item($product, $this->transformer);
+        $products = Product::paginate($request->input('per_page', 10));
+        return $this->response->paginator($products, $this->transformer);
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        OrderDetail::where('product_id', $id)->forceDelete();
+        SupplierProduct::where('product_id', $id)->forceDelete();
         $product = Product::findOrfail($id);
         $product->delete();
-        return $this->response->noContent();
+        $products = Product::paginate($request->input('per_page', 10));
+        return $this->response->paginator($products, $this->transformer);
     }
 
-    public function permanentDestroy($id)
+    public function permanentDestroy(Request $request, $id)
     {
         OrderDetail::where('product_id', $id)->forceDelete();
         SupplierProduct::where('product_id', $id)->forceDelete();
         Product::findOrfail($id)->forceDelete();
-        return $this->response->noContent();
+        $products = Product::paginate($request->input('per_page', 10));
+        return $this->response->paginator($products, $this->transformer);
     }
 }

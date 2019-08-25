@@ -38,10 +38,11 @@ class SupplierController extends Controller
         $request->validate([
             'name' => ['required']
         ]);
-        $supplier = Supplier::create([
+        Supplier::create([
             'name' => $request->input('name')
         ]);
-        return $this->response->item($supplier, $this->transformer);
+        $suppliers = Supplier::paginate($request->input('per_page', 10));
+        return $this->response->paginator($suppliers, $this->transformer);
     }
 
     public function update(Request $request, $id)
@@ -51,16 +52,19 @@ class SupplierController extends Controller
         return $this->response->item($supplier, $this->transformer);
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        SupplierProduct::where('supplier_id', $id)->forceDelete();
         Supplier::findOrfail($id)->delete();
-        return $this->response->noContent();
+        $suppliers = Supplier::paginate($request->input('per_page', 10));
+        return $this->response->paginator($suppliers, $this->transformer);
     }
 
-    public function forceDestroy($id)
+    public function forceDestroy(Request $request, $id)
     {
         SupplierProduct::where('supplier_id', $id)->forceDelete();
         Supplier::findOrfail($id)->forceDelete();
-        return $this->response->noContent();
+        $suppliers = Supplier::paginate($request->input('per_page', 10));
+        return $this->response->paginator($suppliers, $this->transformer);
     }
 }

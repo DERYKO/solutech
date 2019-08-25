@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Transformers\OrderTransformer;
+use App\Order;
 use App\OrderDetail;
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Http\Request;
@@ -20,7 +22,8 @@ class OrderDetailController extends Controller
             'order_id' => $request->input('order_id'),
             'product_id' => $request->input('product_id')
         ]);
-        return $this->response->created();
+        $order = Order::where('id',$request->input('order_id'))->first();
+        return $this->response->item($order,new OrderTransformer());
     }
 
     public function update(Request $request, $id)
@@ -30,14 +33,16 @@ class OrderDetailController extends Controller
         ]);
         $supplier_product = OrderDetail::findOrfail($id);
         $supplier_product->update($request->only(['product_id']));
-        return $this->response->accepted();
+        $order = Order::where('id',$supplier_product->order_id)->first();
+        return $this->response->item($order,new OrderTransformer());
     }
 
     public function destroy($id)
     {
         $supplier_product = OrderDetail::findOrfail($id);
         $supplier_product->delete();
-        return $this->response->noContent();
+        $order = Order::where('id',$supplier_product->order_id)->first();
+        return $this->response->item($order,new OrderTransformer());
     }
 
     public function forceDestroy($id)

@@ -7,26 +7,62 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import VueRouter from 'vue-router'
+import Notifications from 'vue-notification';
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+Vue.use(Notifications);
+Vue.use(VueRouter)
 
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
+import Signup from './components/Signup.vue'
+import AppLayout from './components/App_layout.vue'
+import Login from './components/Login.vue'
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+const routes = [
+    {path: '/', component: Login},
+    {path: '/register', component: Signup},
+    {
+        path: '/home', props: true, component: AppLayout, children: [
+            {
+                path: '/suppliers',
+                name: 'app.suppliers',
+                component: () => import(/* webpackChunkName: "events" */ './components/Suppliers')
+            },
+            {
+                path: '/products',
+                name: 'app.products',
+                component: () => import(/* webpackChunkName: "events" */ './components/Products')
+            },
+            {
+                path: '/orders',
+                name: 'app.orders',
+                component: () => import(/* webpackChunkName: "events" */ './components/Orders')
+            },
+            {
+                path: '/suppliers/edit',
+                name: 'app.supplier.edit',
+                component: () => import(/* webpackChunkName: "events" */ './components/Supplier-edit'),
+            },
+            {
+                path: '/orders/edit',
+                name: 'app.order.edit',
+                component: () => import(/* webpackChunkName: "events" */ './components/Order-edit'),
+            },
+            {
+                path: '/product/edit',
+                name: 'app.product.edit',
+                component: () => import(/* webpackChunkName: "events" */ './components/Product-edit'),
+            }
+        ]
+    }
+];
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+const router = new VueRouter({
+    routes
+});
 
 const app = new Vue({
     el: '#app',
+    router
 });

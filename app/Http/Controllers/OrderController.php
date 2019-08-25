@@ -41,7 +41,8 @@ class OrderController extends Controller
         $order = Order::create([
             'order_number' => $request->input('order_number')
         ]);
-        return $this->response->item($order, $this->transformer);
+        $orders = Order::paginate($request->input('per_page', 10));
+        return $this->response->paginator($orders, $this->transformer);
     }
 
     public function update(Request $request, $id)
@@ -51,18 +52,21 @@ class OrderController extends Controller
         return $this->response->item($order, $this->transformer);
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        OrderDetail::where('order_id', $id)->forceDelete();
         $order = Order::findOrfail($id);
         $order->delete();
-        return $this->response->noContent();
+        $orders = Order::paginate($request->input('per_page', 10));
+        return $this->response->paginator($orders, $this->transformer);
     }
 
-    public function permanentDestroy($id)
+    public function permanentDestroy(Request $request, $id)
     {
         OrderDetail::where('order_id', $id)->forceDelete();
         Order::findOrfail($id)->forceDelete();
-        return $this->response->noContent();
+        $orders = Order::paginate($request->input('per_page', 10));
+        return $this->response->paginator($orders, $this->transformer);
     }
 }
 

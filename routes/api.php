@@ -14,6 +14,9 @@ $api->version('v1', function (Router $api) {
             $api->resource('/supplier', 'SupplierController');
             $api->resource('/supplier_product', 'SupplierProductController');
             $api->resource('/order_detail', 'OrderDetailController');
+            $api->get('/profile',function (\Illuminate\Http\Request $request){
+               return $request->user();
+            });
         });
     });
 });
