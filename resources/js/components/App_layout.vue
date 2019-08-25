@@ -56,6 +56,7 @@
 <script>
     export default {
         mounted() {
+            //retrieve authenticated user profile
             const token = localStorage.getItem("token");
             let config = {
                 headers: {'Authorization': "Bearer " + token}
@@ -77,6 +78,7 @@
         },
         methods: {
             logout(){
+                //logout and revoke user token
                 const token = localStorage.getItem("token");
                 let config = {
                     headers: {'Authorization': "Bearer " + token}

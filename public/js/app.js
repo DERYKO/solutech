@@ -1871,6 +1871,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
+    //retrieve authenticated user profile
     var token = localStorage.getItem("token");
     var config = {
       headers: {
@@ -1895,6 +1896,7 @@ __webpack_require__.r(__webpack_exports__);
     logout: function logout() {
       var _this2 = this;
 
+      //logout and revoke user token
       var token = localStorage.getItem("token");
       var config = {
         headers: {
@@ -1977,6 +1979,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   beforeMount: function beforeMount() {
+    //check user exists
     var token = localStorage.getItem("token");
 
     if (token) {
@@ -1993,6 +1996,7 @@ __webpack_require__.r(__webpack_exports__);
     login: function login() {
       var _this = this;
 
+      //login
       axios.post('api/login', {
         email: this.email,
         password: this.password
@@ -2100,6 +2104,7 @@ __webpack_require__.r(__webpack_exports__);
     save: function save() {
       var _this = this;
 
+      //register user
       var data = {
         name: this.name,
         email: this.email,
@@ -54356,7 +54361,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+ //notifications
 
+ //pagination
 
 
 Vue.component('paginate', vuejs_paginate__WEBPACK_IMPORTED_MODULE_2___default.a);
@@ -54366,6 +54373,7 @@ Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]); // const files = re
 
 
 
+ //app routes
 
 var routes = [{
   path: '/',

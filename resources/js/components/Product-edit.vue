@@ -59,6 +59,7 @@
 <script>
     export default {
         mounted() {
+            //show product detail
             const token = localStorage.getItem("token");
             let config = {
                 headers: {'Authorization': "Bearer " + token}
@@ -76,6 +77,7 @@
         },
         methods: {
             update() {
+                //update product
                 const token = localStorage.getItem("token");
                 let config = {
                     headers: {'Authorization': "Bearer " + token}

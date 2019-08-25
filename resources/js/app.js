@@ -8,7 +8,9 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 import VueRouter from 'vue-router'
+//notifications
 import Notifications from 'vue-notification';
+//pagination
 import Paginate from 'vuejs-paginate'
 Vue.component('paginate', Paginate)
 Vue.use(Notifications);
@@ -19,7 +21,7 @@ Vue.use(VueRouter)
 import Signup from './components/Signup.vue'
 import AppLayout from './components/App_layout.vue'
 import Login from './components/Login.vue'
-
+//app routes
 const routes = [
     {path: '/', component: Login},
     {path: '/register', component: Signup},

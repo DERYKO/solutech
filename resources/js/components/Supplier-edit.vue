@@ -74,6 +74,7 @@
 <script>
     export default {
         mounted() {
+            //get supplier detail
             const token = localStorage.getItem("token");
             let config = {
                 headers: {'Authorization': "Bearer " + token}
@@ -96,6 +97,7 @@
         },
         methods: {
             update() {
+                //update supplier
                 const token = localStorage.getItem("token");
                 let config = {
                     headers: {'Authorization': "Bearer " + token}
@@ -105,6 +107,7 @@
                 })
             },
             attach() {
+                //attach a product to a supplier
                 const token = localStorage.getItem("token");
                 let config = {
                     headers: {'Authorization': "Bearer " + token}
@@ -117,7 +120,7 @@
                 })
             },
             proRemove(product_id){
-                console.log(product_id)
+                //remove a supplier product
                 const token = localStorage.getItem("token");
                 let config = {
                     headers: {'Authorization': "Bearer " + token}

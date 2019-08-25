@@ -80,6 +80,7 @@
 <script>
     export default {
         mounted() {
+            //get list of suppliers
             const token = localStorage.getItem("token");
             let config = {
                 headers: {'Authorization': "Bearer " + token}
@@ -99,6 +100,7 @@
         },
         methods: {
             create() {
+                //add a supplier
                 const token = localStorage.getItem("token");
                 let config = {
                     headers: {'Authorization': "Bearer " + token}
@@ -108,6 +110,7 @@
                 })
             },
             suppRemove(id) {
+                //remove a supplier
                 const token = localStorage.getItem("token");
                 let config = {
                     headers: {'Authorization': "Bearer " + token}
@@ -118,6 +121,7 @@
                 })
             },
             loadNextPage() {
+                //next page
                 const token = localStorage.getItem("token");
                 let config = {
                     headers: {'Authorization': "Bearer " + token}
@@ -129,6 +133,7 @@
                 }
             },
             loadPreviousPage() {
+                //previous page
                 const token = localStorage.getItem("token");
                 let config = {
                     headers: {'Authorization': "Bearer " + token}

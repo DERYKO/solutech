@@ -94,6 +94,7 @@
         },
         methods: {
             create() {
+                //create order
                 const token = localStorage.getItem("token");
                 let config = {
                     headers: {'Authorization': "Bearer " + token}
@@ -103,6 +104,7 @@
                 })
             },
             suppRemove(id) {
+                // remove order
                 const token = localStorage.getItem("token");
                 let config = {
                     headers: {'Authorization': "Bearer " + token}
@@ -112,6 +114,7 @@
                 })
             },
             loadNextPage() {
+                //previous page
                 const token = localStorage.getItem("token");
                 let config = {
                     headers: {'Authorization': "Bearer " + token}
@@ -123,6 +126,7 @@
                 }
             },
             loadPreviousPage() {
+                //next page
                 const token = localStorage.getItem("token");
                 let config = {
                     headers: {'Authorization': "Bearer " + token}

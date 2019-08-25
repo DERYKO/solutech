@@ -102,6 +102,7 @@
 <script>
     export default {
         mounted() {
+            //get list of products
             const token = localStorage.getItem("token");
             let config = {
                 headers: {'Authorization': "Bearer " + token}
@@ -123,6 +124,7 @@
         },
         methods: {
             create() {
+                //create a product
                 const token = localStorage.getItem("token");
                 let config = {
                     headers: {'Authorization': "Bearer " + token}
@@ -132,6 +134,7 @@
                 })
             },
             suppRemove(id){
+                //delete a product
                 const token = localStorage.getItem("token");
                 let config = {
                     headers: {'Authorization': "Bearer " + token}
@@ -141,6 +144,7 @@
                 })
             },
             loadNextPage() {
+                // next page
                 const token = localStorage.getItem("token");
                 let config = {
                     headers: {'Authorization': "Bearer " + token}
@@ -152,6 +156,7 @@
                 }
             },
             loadPreviousPage() {
+                //previous page
                 const token = localStorage.getItem("token");
                 let config = {
                     headers: {'Authorization': "Bearer " + token}

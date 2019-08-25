@@ -76,6 +76,7 @@
         },
         methods:{
             save(){
+                //register user
                 let data ={
                     name: this.name,
                     email: this.email,

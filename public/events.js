@@ -86,6 +86,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
+    //show order detail
     var token = localStorage.getItem("token");
     var config = {
       headers: {
@@ -113,6 +114,7 @@ __webpack_require__.r(__webpack_exports__);
     update: function update() {
       var _this2 = this;
 
+      //update order
       var token = localStorage.getItem("token");
       var config = {
         headers: {
@@ -126,6 +128,7 @@ __webpack_require__.r(__webpack_exports__);
     attach: function attach() {
       var _this3 = this;
 
+      //attach product to order
       var token = localStorage.getItem("token");
       var config = {
         headers: {
@@ -142,6 +145,7 @@ __webpack_require__.r(__webpack_exports__);
     proRemove: function proRemove(product_id) {
       var _this4 = this;
 
+      //delete product
       console.log(product_id);
       var token = localStorage.getItem("token");
       var config = {
@@ -269,6 +273,7 @@ __webpack_require__.r(__webpack_exports__);
     create: function create() {
       var _this2 = this;
 
+      //create order
       var token = localStorage.getItem("token");
       var config = {
         headers: {
@@ -284,6 +289,7 @@ __webpack_require__.r(__webpack_exports__);
     suppRemove: function suppRemove(id) {
       var _this3 = this;
 
+      // remove order
       var token = localStorage.getItem("token");
       var config = {
         headers: {
@@ -297,6 +303,7 @@ __webpack_require__.r(__webpack_exports__);
     loadNextPage: function loadNextPage() {
       var _this4 = this;
 
+      //previous page
       var token = localStorage.getItem("token");
       var config = {
         headers: {
@@ -313,6 +320,7 @@ __webpack_require__.r(__webpack_exports__);
     loadPreviousPage: function loadPreviousPage() {
       var _this5 = this;
 
+      //next page
       var token = localStorage.getItem("token");
       var config = {
         headers: {
@@ -402,6 +410,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
+    //show product detail
     var token = localStorage.getItem("token");
     var config = {
       headers: {
@@ -424,6 +433,7 @@ __webpack_require__.r(__webpack_exports__);
     update: function update() {
       var _this2 = this;
 
+      //update product
       var token = localStorage.getItem("token");
       var config = {
         headers: {
@@ -553,6 +563,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
+    //get list of products
     var token = localStorage.getItem("token");
     var config = {
       headers: {
@@ -579,6 +590,7 @@ __webpack_require__.r(__webpack_exports__);
     create: function create() {
       var _this2 = this;
 
+      //create a product
       var token = localStorage.getItem("token");
       var config = {
         headers: {
@@ -596,6 +608,7 @@ __webpack_require__.r(__webpack_exports__);
     suppRemove: function suppRemove(id) {
       var _this3 = this;
 
+      //delete a product
       var token = localStorage.getItem("token");
       var config = {
         headers: {
@@ -609,6 +622,7 @@ __webpack_require__.r(__webpack_exports__);
     loadNextPage: function loadNextPage() {
       var _this4 = this;
 
+      // next page
       var token = localStorage.getItem("token");
       var config = {
         headers: {
@@ -625,6 +639,7 @@ __webpack_require__.r(__webpack_exports__);
     loadPreviousPage: function loadPreviousPage() {
       var _this5 = this;
 
+      //previous page
       var token = localStorage.getItem("token");
       var config = {
         headers: {
@@ -729,6 +744,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
+    //get supplier detail
     var token = localStorage.getItem("token");
     var config = {
       headers: {
@@ -756,6 +772,7 @@ __webpack_require__.r(__webpack_exports__);
     update: function update() {
       var _this2 = this;
 
+      //update supplier
       var token = localStorage.getItem("token");
       var config = {
         headers: {
@@ -769,6 +786,7 @@ __webpack_require__.r(__webpack_exports__);
     attach: function attach() {
       var _this3 = this;
 
+      //attach a product to a supplier
       var token = localStorage.getItem("token");
       var config = {
         headers: {
@@ -785,7 +803,7 @@ __webpack_require__.r(__webpack_exports__);
     proRemove: function proRemove(product_id) {
       var _this4 = this;
 
-      console.log(product_id);
+      //remove a supplier product
       var token = localStorage.getItem("token");
       var config = {
         headers: {
@@ -893,6 +911,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
+    //get list of suppliers
     var token = localStorage.getItem("token");
     var config = {
       headers: {
@@ -917,6 +936,7 @@ __webpack_require__.r(__webpack_exports__);
     create: function create() {
       var _this2 = this;
 
+      //add a supplier
       var token = localStorage.getItem("token");
       var config = {
         headers: {
@@ -932,6 +952,7 @@ __webpack_require__.r(__webpack_exports__);
     suppRemove: function suppRemove(id) {
       var _this3 = this;
 
+      //remove a supplier
       var token = localStorage.getItem("token");
       var config = {
         headers: {
@@ -946,6 +967,7 @@ __webpack_require__.r(__webpack_exports__);
     loadNextPage: function loadNextPage() {
       var _this4 = this;
 
+      //next page
       var token = localStorage.getItem("token");
       var config = {
         headers: {
@@ -962,6 +984,7 @@ __webpack_require__.r(__webpack_exports__);
     loadPreviousPage: function loadPreviousPage() {
       var _this5 = this;
 
+      //previous page
       var token = localStorage.getItem("token");
       var config = {
         headers: {

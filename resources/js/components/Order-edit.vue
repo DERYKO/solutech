@@ -74,6 +74,7 @@
 <script>
     export default {
         mounted() {
+            //show order detail
             const token = localStorage.getItem("token");
             let config = {
                 headers: {'Authorization': "Bearer " + token}
@@ -96,6 +97,7 @@
         },
         methods: {
             update() {
+                //update order
                 const token = localStorage.getItem("token");
                 let config = {
                     headers: {'Authorization': "Bearer " + token}
@@ -105,6 +107,7 @@
                 })
             },
             attach() {
+                //attach product to order
                 const token = localStorage.getItem("token");
                 let config = {
                     headers: {'Authorization': "Bearer " + token}
@@ -117,6 +120,7 @@
                 })
             },
             proRemove(product_id){
+                //delete product
                 console.log(product_id)
                 const token = localStorage.getItem("token");
                 let config = {

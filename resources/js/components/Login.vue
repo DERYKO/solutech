@@ -55,6 +55,7 @@
 <script>
     export default {
         beforeMount(){
+            //check user exists
             const token = localStorage.getItem("token");
             if (token) {
                 this.$router.push('/home');
@@ -68,6 +69,7 @@
         },
         methods: {
             login() {
+                //login
                 axios.post('api/login', {email: this.email, password: this.password}).then((response) => {
                     localStorage.setItem("token", response.data.token);
                     this.$router.push('/home');

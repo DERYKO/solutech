@@ -26,6 +26,7 @@
 </head>
 <body class="o-page o-page--center">
 <div id="app">
+    <!-- Vue Integration Point -->
     <router-view>
     </router-view>
 </div>
