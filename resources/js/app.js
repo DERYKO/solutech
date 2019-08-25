@@ -9,7 +9,8 @@ require('./bootstrap');
 window.Vue = require('vue');
 import VueRouter from 'vue-router'
 import Notifications from 'vue-notification';
-
+import Paginate from 'vuejs-paginate'
+Vue.component('paginate', Paginate)
 Vue.use(Notifications);
 Vue.use(VueRouter)
 
@@ -23,7 +24,7 @@ const routes = [
     {path: '/', component: Login},
     {path: '/register', component: Signup},
     {
-        path: '/home', props: true, component: AppLayout, children: [
+        path: '/home', component: AppLayout, children: [
             {
                 path: '/suppliers',
                 name: 'app.suppliers',
@@ -40,17 +41,18 @@ const routes = [
                 component: () => import(/* webpackChunkName: "events" */ './components/Orders')
             },
             {
-                path: '/suppliers/edit',
+                path: '',
                 name: 'app.supplier.edit',
+                props: true,
                 component: () => import(/* webpackChunkName: "events" */ './components/Supplier-edit'),
             },
             {
-                path: '/orders/edit',
+                path: '/orders/:id',
                 name: 'app.order.edit',
                 component: () => import(/* webpackChunkName: "events" */ './components/Order-edit'),
             },
             {
-                path: '/product/edit',
+                path: '/product/:id',
                 name: 'app.product.edit',
                 component: () => import(/* webpackChunkName: "events" */ './components/Product-edit'),
             }

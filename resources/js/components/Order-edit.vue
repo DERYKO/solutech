@@ -56,14 +56,11 @@
                             </div>
                         </div>
                     </td>
-                    <td class="c-table__cell"><span
-                            class="c-badge c-badge--success u-text-uppercase c-badge--small">{{product.description}}</span>
+                    <td class="c-table__cell"><span>{{product.description}}</span>
                     </td>
-                    <td class="c-table__cell"><span
-                            class="c-badge c-badge--success u-text-uppercase c-badge--small">{{product.quantity}}</span>
+                    <td class="c-table__cell"><span>{{product.quantity}}</span>
                     </td>
-                    <td class="c-table__cell"><span
-                            class="c-badge c-badge--success u-text-uppercase c-badge--small">{{product.created_at}}</span>
+                    <td class="c-table__cell"><span>{{product.created_at}}</span>
                     </td>
                     <td class="c-table__cell u-float-right">
                         <button @click="proRemove(product.id)" class="c-btn c-btn--danger smal">Remove</button>
@@ -77,7 +74,6 @@
 <script>
     export default {
         mounted() {
-            this.order = this.$route.params.order;
             const token = localStorage.getItem("token");
             let config = {
                 headers: {'Authorization': "Bearer " + token}
@@ -85,6 +81,9 @@
             if (token) {
                 axios.get('api/product', config).then((response) => {
                     this.products = response.data.data
+                })
+                axios.get('api/order/'+this.$route.params.id, config).then((response) => {
+                    this.order = response.data.data
                 })
             }
         },

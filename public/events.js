@@ -82,14 +82,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var _this = this;
 
-    this.order = this.$route.params.order;
     var token = localStorage.getItem("token");
     var config = {
       headers: {
@@ -100,6 +96,9 @@ __webpack_require__.r(__webpack_exports__);
     if (token) {
       axios.get('api/product', config).then(function (response) {
         _this.products = response.data.data;
+      });
+      axios.get('api/order/' + this.$route.params.id, config).then(function (response) {
+        _this.order = response.data.data;
       });
     }
   },
@@ -234,6 +233,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var _this = this;
@@ -247,7 +254,7 @@ __webpack_require__.r(__webpack_exports__);
 
     if (token) {
       axios.get('api/order', config).then(function (response) {
-        _this.orders = response.data.data;
+        _this.orders = response.data;
       });
     }
   },
@@ -271,7 +278,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('api/order', {
         order_number: this.order_number
       }, config).then(function (response) {
-        _this2.orders = response.data.data;
+        _this2.orders = response.data;
       });
     },
     suppRemove: function suppRemove(id) {
@@ -284,8 +291,40 @@ __webpack_require__.r(__webpack_exports__);
         }
       };
       axios["delete"]('api/order/' + id, config).then(function (response) {
-        _this3.orders = response.data.data;
+        _this3.orders = response.data;
       });
+    },
+    loadNextPage: function loadNextPage() {
+      var _this4 = this;
+
+      var token = localStorage.getItem("token");
+      var config = {
+        headers: {
+          'Authorization': "Bearer " + token
+        }
+      };
+
+      if (token) {
+        axios.get(this.orders.meta.pagination.links.next, config).then(function (response) {
+          _this4.orders = response.data;
+        });
+      }
+    },
+    loadPreviousPage: function loadPreviousPage() {
+      var _this5 = this;
+
+      var token = localStorage.getItem("token");
+      var config = {
+        headers: {
+          'Authorization': "Bearer " + token
+        }
+      };
+
+      if (token) {
+        axios.get(this.orders.meta.pagination.links.previous, config).then(function (response) {
+          _this5.orders = response.data;
+        });
+      }
     }
   }
 });
@@ -361,7 +400,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    this.product = this.$route.params.product;
+    var _this = this;
+
+    var token = localStorage.getItem("token");
+    var config = {
+      headers: {
+        'Authorization': "Bearer " + token
+      }
+    };
+
+    if (token) {
+      axios.get('api/product/' + this.$route.params.id, config).then(function (response) {
+        _this.product = response.data.data;
+      });
+    }
   },
   data: function data() {
     return {
@@ -370,7 +422,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     update: function update() {
-      var _this = this;
+      var _this2 = this;
 
       var token = localStorage.getItem("token");
       var config = {
@@ -379,7 +431,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       };
       axios.put('api/product/' + this.product.id, this.product, config).then(function (response) {
-        _this.product = response.data.data;
+        _this2.product = response.data.data;
       });
     }
   }
@@ -494,6 +546,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var _this = this;
@@ -507,7 +562,7 @@ __webpack_require__.r(__webpack_exports__);
 
     if (token) {
       axios.get('api/product', config).then(function (response) {
-        _this.products = response.data.data;
+        _this.products = response.data;
       });
     }
   },
@@ -535,7 +590,7 @@ __webpack_require__.r(__webpack_exports__);
         description: this.description,
         quantity: this.quantity
       }, config).then(function (response) {
-        _this2.products = response.data.data;
+        _this2.products = response.data;
       });
     },
     suppRemove: function suppRemove(id) {
@@ -548,8 +603,40 @@ __webpack_require__.r(__webpack_exports__);
         }
       };
       axios["delete"]('api/product/' + id, config).then(function (response) {
-        _this3.products = response.data.data;
+        _this3.products = response.data;
       });
+    },
+    loadNextPage: function loadNextPage() {
+      var _this4 = this;
+
+      var token = localStorage.getItem("token");
+      var config = {
+        headers: {
+          'Authorization': "Bearer " + token
+        }
+      };
+
+      if (token) {
+        axios.get(this.products.meta.pagination.links.next, config).then(function (response) {
+          _this4.products = response.data;
+        });
+      }
+    },
+    loadPreviousPage: function loadPreviousPage() {
+      var _this5 = this;
+
+      var token = localStorage.getItem("token");
+      var config = {
+        headers: {
+          'Authorization': "Bearer " + token
+        }
+      };
+
+      if (token) {
+        axios.get(this.products.meta.pagination.links.previous, config).then(function (response) {
+          _this5.products = response.data;
+        });
+      }
     }
   }
 });
@@ -638,14 +725,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var _this = this;
 
-    this.supplier = this.$route.params.supplier;
     var token = localStorage.getItem("token");
     var config = {
       headers: {
@@ -656,6 +739,9 @@ __webpack_require__.r(__webpack_exports__);
     if (token) {
       axios.get('api/product', config).then(function (response) {
         _this.products = response.data.data;
+      });
+      axios.get('api/supplier/' + this.$route.params.id, config).then(function (response) {
+        _this.supplier = response.data.data;
       });
     }
   },
@@ -796,6 +882,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var _this = this;
@@ -808,8 +901,8 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     if (token) {
-      axios.get('api/supplier?include=products', config).then(function (response) {
-        _this.suppliers = response.data.data;
+      axios.get('api/supplier', config).then(function (response) {
+        _this.suppliers = response.data;
       });
     }
   },
@@ -833,7 +926,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('api/supplier', {
         name: this.name
       }, config).then(function (response) {
-        _this2.suppliers = response.data.data;
+        _this2.suppliers = response.data;
       });
     },
     suppRemove: function suppRemove(id) {
@@ -847,8 +940,40 @@ __webpack_require__.r(__webpack_exports__);
       };
       console.log(this.token);
       axios["delete"]('api/supplier/' + id, config).then(function (response) {
-        _this3.suppliers = response.data.data;
+        _this3.suppliers = response.data;
       });
+    },
+    loadNextPage: function loadNextPage() {
+      var _this4 = this;
+
+      var token = localStorage.getItem("token");
+      var config = {
+        headers: {
+          'Authorization': "Bearer " + token
+        }
+      };
+
+      if (token) {
+        axios.get(this.suppliers.meta.pagination.links.next, config).then(function (response) {
+          _this4.suppliers = response.data;
+        });
+      }
+    },
+    loadPreviousPage: function loadPreviousPage() {
+      var _this5 = this;
+
+      var token = localStorage.getItem("token");
+      var config = {
+        headers: {
+          'Authorization': "Bearer " + token
+        }
+      };
+
+      if (token) {
+        axios.get(this.suppliers.meta.pagination.links.previous, config).then(function (response) {
+          _this5.suppliers = response.data;
+        });
+      }
     }
   }
 });
@@ -1062,36 +1187,15 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("td", { staticClass: "c-table__cell" }, [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "c-badge c-badge--success u-text-uppercase c-badge--small"
-                    },
-                    [_vm._v(_vm._s(product.description))]
-                  )
+                  _c("span", [_vm._v(_vm._s(product.description))])
                 ]),
                 _vm._v(" "),
                 _c("td", { staticClass: "c-table__cell" }, [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "c-badge c-badge--success u-text-uppercase c-badge--small"
-                    },
-                    [_vm._v(_vm._s(product.quantity))]
-                  )
+                  _c("span", [_vm._v(_vm._s(product.quantity))])
                 ]),
                 _vm._v(" "),
                 _c("td", { staticClass: "c-table__cell" }, [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "c-badge c-badge--success u-text-uppercase c-badge--small"
-                    },
-                    [_vm._v(_vm._s(product.created_at))]
-                  )
+                  _c("span", [_vm._v(_vm._s(product.created_at))])
                 ]),
                 _vm._v(" "),
                 _c("td", { staticClass: "c-table__cell u-float-right" }, [
@@ -1295,7 +1399,7 @@ var render = function() {
         [
           _vm._m(1),
           _vm._v(" "),
-          _vm._l(_vm.orders, function(order) {
+          _vm._l(_vm.orders.data, function(order) {
             return _c("tbody", [
               _c("tr", { staticClass: "c-table__row" }, [
                 _c("td", { staticClass: "c-table__cell" }, [
@@ -1310,14 +1414,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("td", { staticClass: "c-table__cell" }, [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "c-badge c-badge--success u-text-uppercase c-badge--small"
-                    },
-                    [_vm._v(_vm._s(order.created_at))]
-                  )
+                  _c("span", [_vm._v(_vm._s(order.created_at))])
                 ]),
                 _vm._v(" "),
                 _c(
@@ -1331,7 +1428,7 @@ var render = function() {
                         attrs: {
                           to: {
                             name: "app.order.edit",
-                            params: { order: order }
+                            params: { id: order.id }
                           }
                         }
                       },
@@ -1362,7 +1459,31 @@ var render = function() {
           })
         ],
         2
-      )
+      ),
+      _vm._v(" "),
+      _vm.orders.meta.pagination.links.previous
+        ? _c(
+            "button",
+            {
+              staticClass: "c-btn--fancy btn-outline-success",
+              staticStyle: { "margin-top": "3%" },
+              on: { click: _vm.loadPreviousPage }
+            },
+            [_vm._v("Previous Page\n        ")]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.orders.meta.pagination.links.next
+        ? _c(
+            "button",
+            {
+              staticClass: "c-btn--fancy btn-outline-success",
+              staticStyle: { "margin-top": "3%" },
+              on: { click: _vm.loadNextPage }
+            },
+            [_vm._v("Next Page\n        ")]
+          )
+        : _vm._e()
     ])
   ])
 }
@@ -1909,7 +2030,7 @@ var render = function() {
         [
           _vm._m(1),
           _vm._v(" "),
-          _vm._l(_vm.products, function(product) {
+          _vm._l(_vm.products.data, function(product) {
             return _c("tbody", [
               _c("tr", { staticClass: "c-table__row" }, [
                 _c("td", { staticClass: "c-table__cell" }, [
@@ -1926,36 +2047,15 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("td", { staticClass: "c-table__cell" }, [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "c-badge c-badge--success u-text-uppercase c-badge--small"
-                    },
-                    [_vm._v(_vm._s(product.description))]
-                  )
+                  _c("span", [_vm._v(_vm._s(product.description))])
                 ]),
                 _vm._v(" "),
                 _c("td", { staticClass: "c-table__cell" }, [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "c-badge c-badge--success u-text-uppercase c-badge--small"
-                    },
-                    [_vm._v(_vm._s(product.quantity))]
-                  )
+                  _c("span", [_vm._v(_vm._s(product.quantity))])
                 ]),
                 _vm._v(" "),
                 _c("td", { staticClass: "c-table__cell" }, [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "c-badge c-badge--success u-text-uppercase c-badge--small"
-                    },
-                    [_vm._v(_vm._s(product.created_at))]
-                  )
+                  _c("span", [_vm._v(_vm._s(product.created_at))])
                 ]),
                 _vm._v(" "),
                 _c(
@@ -1969,7 +2069,7 @@ var render = function() {
                         attrs: {
                           to: {
                             name: "app.product.edit",
-                            params: { product: product }
+                            params: { id: product.id }
                           }
                         }
                       },
@@ -2000,7 +2100,31 @@ var render = function() {
           })
         ],
         2
-      )
+      ),
+      _vm._v(" "),
+      _vm.products.meta.pagination.links.previous
+        ? _c(
+            "button",
+            {
+              staticClass: "c-btn--fancy btn-outline-success",
+              staticStyle: { "margin-top": "3%" },
+              on: { click: _vm.loadPreviousPage }
+            },
+            [_vm._v("Previous Page\n        ")]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.products.meta.pagination.links.next
+        ? _c(
+            "button",
+            {
+              staticClass: "c-btn--fancy btn-outline-success",
+              staticStyle: { "margin-top": "3%" },
+              on: { click: _vm.loadNextPage }
+            },
+            [_vm._v("Next Page\n        ")]
+          )
+        : _vm._e()
     ])
   ])
 }
@@ -2282,36 +2406,15 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("td", { staticClass: "c-table__cell" }, [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "c-badge c-badge--success u-text-uppercase c-badge--small"
-                    },
-                    [_vm._v(_vm._s(product.description))]
-                  )
+                  _c("span", [_vm._v(_vm._s(product.description))])
                 ]),
                 _vm._v(" "),
                 _c("td", { staticClass: "c-table__cell" }, [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "c-badge c-badge--success u-text-uppercase c-badge--small"
-                    },
-                    [_vm._v(_vm._s(product.quantity))]
-                  )
+                  _c("span", [_vm._v(_vm._s(product.quantity))])
                 ]),
                 _vm._v(" "),
                 _c("td", { staticClass: "c-table__cell" }, [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "c-badge c-badge--success u-text-uppercase c-badge--small"
-                    },
-                    [_vm._v(_vm._s(product.created_at))]
-                  )
+                  _c("span", [_vm._v(_vm._s(product.created_at))])
                 ]),
                 _vm._v(" "),
                 _c("td", { staticClass: "c-table__cell u-float-right" }, [
@@ -2515,7 +2618,7 @@ var render = function() {
         [
           _vm._m(1),
           _vm._v(" "),
-          _vm._l(_vm.suppliers, function(supplier) {
+          _vm._l(_vm.suppliers.data, function(supplier) {
             return _c("tbody", [
               _c("tr", { staticClass: "c-table__row" }, [
                 _c("td", { staticClass: "c-table__cell" }, [
@@ -2555,7 +2658,7 @@ var render = function() {
                         attrs: {
                           to: {
                             name: "app.supplier.edit",
-                            params: { supplier: supplier }
+                            params: { id: supplier.id }
                           }
                         }
                       },
@@ -2586,7 +2689,31 @@ var render = function() {
           })
         ],
         2
-      )
+      ),
+      _vm._v(" "),
+      _vm.suppliers.meta.pagination.links.previous
+        ? _c(
+            "button",
+            {
+              staticClass: "c-btn--fancy btn-outline-success",
+              staticStyle: { "margin-top": "3%" },
+              on: { click: _vm.loadPreviousPage }
+            },
+            [_vm._v("Previous Page\n        ")]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.suppliers.meta.pagination.links.next
+        ? _c(
+            "button",
+            {
+              staticClass: "c-btn--fancy btn-outline-success",
+              staticStyle: { "margin-top": "10%" },
+              on: { click: _vm.loadNextPage }
+            },
+            [_vm._v("Next Page\n        ")]
+          )
+        : _vm._e()
     ])
   ])
 }

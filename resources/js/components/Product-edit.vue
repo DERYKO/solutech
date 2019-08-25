@@ -59,7 +59,15 @@
 <script>
     export default {
         mounted() {
-            this.product = this.$route.params.product;
+            const token = localStorage.getItem("token");
+            let config = {
+                headers: {'Authorization': "Bearer " + token}
+            };
+            if (token) {
+                axios.get('api/product/'+this.$route.params.id, config).then((response) => {
+                    this.product = response.data.data
+                })
+            }
         },
         data() {
             return {

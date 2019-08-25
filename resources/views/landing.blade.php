@@ -26,7 +26,8 @@
 </head>
 <body class="o-page o-page--center">
 <div id="app">
-    <router-view></router-view>
+    <router-view>
+    </router-view>
 </div>
 </body>
 </html>

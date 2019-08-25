@@ -1,12 +1,12 @@
 <template>
     <div class="o-page__card o-page__card--horizontal">
+        <notifications position="bottom right" width="400"/>
         <div class="c-card c-login-horizontal">
             <div class="c-login__content-wrapper" style="width: 55%">
                 <header class="c-login__header u-mt-large u-mb-small">
                     <span style="font-size: 20px; color: blue; font-weight: bold">Order Management Made Easier</span>
                     <span class="u-color-primary u-text-small u-block u-mt-xsmall">The better way to handle orders</span>
                 </header>
-
                 <form @submit.prevent="save" class="c-card__body">
                     <div class="c-field u-mb-small">
                         <label class="c-field__label" for="name">Name</label>
@@ -70,7 +70,8 @@
             return{
                 name: '',
                 email: '',
-                password: ''
+                password: '',
+                errors: []
             }
         },
         methods:{
@@ -83,7 +84,10 @@
                 axios.post('api/register',data).then((response)=>{
                     this.$router.push('/');
                 }).catch((error)=>{
-
+                    this.$notify({
+                        type: 'danger',
+                        text: error.response.data.errors,
+                    });
                 })
             }
         }

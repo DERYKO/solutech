@@ -34,7 +34,6 @@
                 <li class="c-breadcrumb__item c-toolbar__title"><router-link to="/home">User</router-link></li>
                 <li class="c-breadcrumb__item c-toolbar__meta u-color-info">Home</li>
             </ol>
-            <div class="u-hidden-down@tablet" id="event-status-toggle"> <i class="fas fa-circle u-color-success u-mr-xsmall u-text-small"></i> <span class="u-color-warning u-mr-xsmall u-text-bold u-text-small">Welcome</span> </div>
         </div>
         <!-- // .c-toolbar -->
         <div class="c-toolbar u-hidden-up@tablet u-text-center u-pt-xsmall u-mr-xsmall"> <i class="fas fa-circle u-color-success u-mr-xsmall"></i> <span class="u-text-success ">Order Supply</span></div>
@@ -48,7 +47,9 @@
             </div>
         </div>
         <main class="o-page__content">
-                <router-view/>
+            <div class="container u-mb-medium">
+            <router-view/>
+            </div>
         </main>
     </div>
 </template>

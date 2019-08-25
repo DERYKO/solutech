@@ -1,5 +1,6 @@
 <template>
     <div class="o-page__card o-page__card--horizontal">
+        <notifications position="bottom right" width="400"/>
         <div class="c-card c-login-horizontal">
             <div class="c-login__content-wrapper">
                 <header class="c-login__header u-mt-large u-mb-small">
@@ -65,7 +66,10 @@
                     localStorage.setItem("token", response.data.token);
                     this.$router.push('/home');
                 }).catch((error) => {
-                    console.log(error.response)
+                    this.$notify({
+                        type: 'danger',
+                        text: "Wrong Email or Password!!",
+                    });
                 })
             }
         }

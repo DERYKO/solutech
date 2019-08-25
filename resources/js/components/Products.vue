@@ -66,7 +66,7 @@
                     </th>
                 </tr>
                 </thead>
-                <tbody v-for="product in products">
+                <tbody v-for="product in products.data">
                 <tr class="c-table__row" >
                     <td class="c-table__cell">
                         <div class="o-media">
@@ -75,17 +75,14 @@
                             </div>
                         </div>
                     </td>
-                    <td class="c-table__cell"><span
-                            class="c-badge c-badge--success u-text-uppercase c-badge--small">{{product.description}}</span>
+                    <td class="c-table__cell"><span>{{product.description}}</span>
                     </td>
-                    <td class="c-table__cell"><span
-                            class="c-badge c-badge--success u-text-uppercase c-badge--small">{{product.quantity}}</span>
+                    <td class="c-table__cell"><span>{{product.quantity}}</span>
                     </td>
-                    <td class="c-table__cell"><span
-                            class="c-badge c-badge--success u-text-uppercase c-badge--small">{{product.created_at}}</span>
+                    <td class="c-table__cell"><span>{{product.created_at}}</span>
                     </td>
                     <td class="c-table__cell u-float-right">
-                        <router-link class="c-btn c-btn--secondary"  :to="{ name: 'app.product.edit', params: { product : product } }">
+                        <router-link class="c-btn c-btn--secondary"  :to="{ name: 'app.product.edit', params: { id : product.id } }">
                             Edit/View
                         </router-link>
                         <button @click="suppRemove(product.id)" class="c-btn c-btn--danger smal">Remove</button>
@@ -93,6 +90,12 @@
                 </tr>
                 </tbody>
             </table>
+            <button @click="loadPreviousPage" v-if="products.meta.pagination.links.previous" style="margin-top: 3%"
+                    class="c-btn--fancy btn-outline-success">Previous Page
+            </button>
+            <button @click="loadNextPage" v-if="products.meta.pagination.links.next" style="margin-top: 3%"
+                    class="c-btn--fancy btn-outline-success">Next Page
+            </button>
         </div>
     </div>
 </template>
@@ -105,7 +108,7 @@
             };
             if (token) {
                 axios.get('api/product', config).then((response) => {
-                    this.products = response.data.data
+                    this.products = response.data
                 })
             }
         },
@@ -125,7 +128,7 @@
                     headers: {'Authorization': "Bearer " + token}
                 };
                 axios.post('api/product', {name: this.name,description: this.description,quantity: this.quantity}, config).then((response) => {
-                    this.products = response.data.data
+                    this.products = response.data
                 })
             },
             suppRemove(id){
@@ -134,8 +137,30 @@
                     headers: {'Authorization': "Bearer " + token}
                 };
                 axios.delete('api/product/'+id, config).then((response) => {
-                    this.products = response.data.data
+                    this.products = response.data
                 })
+            },
+            loadNextPage() {
+                const token = localStorage.getItem("token");
+                let config = {
+                    headers: {'Authorization': "Bearer " + token}
+                };
+                if (token) {
+                    axios.get(this.products.meta.pagination.links.next, config).then((response) => {
+                        this.products = response.data
+                    })
+                }
+            },
+            loadPreviousPage() {
+                const token = localStorage.getItem("token");
+                let config = {
+                    headers: {'Authorization': "Bearer " + token}
+                };
+                if (token) {
+                    axios.get(this.products.meta.pagination.links.previous, config).then((response) => {
+                        this.products = response.data
+                    })
+                }
             }
         }
 

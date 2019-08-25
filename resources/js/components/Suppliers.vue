@@ -41,8 +41,8 @@
                     </th>
                 </tr>
                 </thead>
-                <tbody v-for="supplier in suppliers">
-                <tr class="c-table__row" >
+                <tbody v-for="supplier in suppliers.data">
+                <tr class="c-table__row">
                     <td class="c-table__cell">
                         <div class="o-media">
                             <div class="o-media__img u-mr-xsmall">
@@ -59,7 +59,8 @@
                             class="c-badge c-badge--success u-text-uppercase c-badge--small">{{supplier.created_at}}</span>
                     </td>
                     <td class="c-table__cell u-float-right">
-                        <router-link class="c-btn c-btn--secondary"  :to="{ name: 'app.supplier.edit', params: { supplier : supplier } }">
+                        <router-link class="c-btn c-btn--secondary"
+                                     :to="{ name: 'app.supplier.edit', params: { id : supplier.id } }">
                             Edit/View
                         </router-link>
                         <button @click="suppRemove(supplier.id)" class="c-btn c-btn--danger smal">Remove</button>
@@ -67,6 +68,12 @@
                 </tr>
                 </tbody>
             </table>
+            <button @click="loadPreviousPage" v-if="suppliers.meta.pagination.links.previous" style="margin-top: 3%"
+                    class="c-btn--fancy btn-outline-success">Previous Page
+            </button>
+            <button @click="loadNextPage" v-if="suppliers.meta.pagination.links.next" style="margin-top: 10%"
+                    class="c-btn--fancy btn-outline-success">Next Page
+            </button>
         </div>
     </div>
 </template>
@@ -78,8 +85,8 @@
                 headers: {'Authorization': "Bearer " + token}
             };
             if (token) {
-                axios.get('api/supplier?include=products', config).then((response) => {
-                    this.suppliers = response.data.data
+                axios.get('api/supplier', config).then((response) => {
+                    this.suppliers = response.data
                 })
             }
         },
@@ -97,18 +104,40 @@
                     headers: {'Authorization': "Bearer " + token}
                 };
                 axios.post('api/supplier', {name: this.name}, config).then((response) => {
-                    this.suppliers = response.data.data
+                    this.suppliers = response.data
                 })
             },
-            suppRemove(id){
+            suppRemove(id) {
                 const token = localStorage.getItem("token");
                 let config = {
                     headers: {'Authorization': "Bearer " + token}
                 };
                 console.log(this.token)
-                axios.delete('api/supplier/'+id, config).then((response) => {
-                    this.suppliers = response.data.data
+                axios.delete('api/supplier/' + id, config).then((response) => {
+                    this.suppliers = response.data
                 })
+            },
+            loadNextPage() {
+                const token = localStorage.getItem("token");
+                let config = {
+                    headers: {'Authorization': "Bearer " + token}
+                };
+                if (token) {
+                    axios.get(this.suppliers.meta.pagination.links.next, config).then((response) => {
+                        this.suppliers = response.data
+                    })
+                }
+            },
+            loadPreviousPage() {
+                const token = localStorage.getItem("token");
+                let config = {
+                    headers: {'Authorization': "Bearer " + token}
+                };
+                if (token) {
+                    axios.get(this.suppliers.meta.pagination.links.previous, config).then((response) => {
+                        this.suppliers = response.data
+                    })
+                }
             }
         }
 
