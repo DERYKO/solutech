@@ -17,12 +17,12 @@
                 <form @submit.prevent="login" class="c-login__content">
                     <div class="c-field u-mb-small">
                         <label class="c-field__label" for="email">Email Address</label>
-                        <input class="c-input" v-model="email" type="email" id="email" placeholder="">
+                        <input class="c-input" v-model="email" type="email" id="email" placeholder="Email" required>
                     </div>
 
                     <div class="c-field u-mb-small">
                         <label class="c-field__label" for="password">Password</label>
-                        <input class="c-input" v-model="password" type="password" id="password" placeholder="">
+                        <input class="c-input" v-model="password" type="password" id="password" placeholder="Password" required>
                     </div>
 
                     <button class="c-btn c-btn--success c-btn--fullwidth" type="submit">Sign In</button>
@@ -54,6 +54,12 @@
 </template>
 <script>
     export default {
+        beforeMount(){
+            const token = localStorage.getItem("token");
+            if (token) {
+                this.$router.push('/home');
+            }
+        },
         data() {
             return {
                 email: '',
@@ -68,7 +74,7 @@
                 }).catch((error) => {
                     this.$notify({
                         type: 'danger',
-                        text: "Wrong Email or Password!!",
+                        text: error.response.data.message,
                     });
                 })
             }

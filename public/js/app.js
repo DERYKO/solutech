@@ -1976,6 +1976,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  beforeMount: function beforeMount() {
+    var token = localStorage.getItem("token");
+
+    if (token) {
+      this.$router.push('/home');
+    }
+  },
   data: function data() {
     return {
       email: '',
@@ -1996,7 +2003,7 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         _this.$notify({
           type: 'danger',
-          text: "Wrong Email or Password!!"
+          text: error.response.data.message
         });
       });
     }
@@ -37506,7 +37513,7 @@ var render = function() {
                 "router-link",
                 {
                   staticClass: "c-sidebar__link ",
-                  attrs: { to: "/suppliers" }
+                  attrs: { to: { name: "app.suppliers" } }
                 },
                 [_vm._v("Suppliers")]
               )
@@ -37695,7 +37702,12 @@ var render = function() {
                     }
                   ],
                   staticClass: "c-input",
-                  attrs: { type: "email", id: "email", placeholder: "" },
+                  attrs: {
+                    type: "email",
+                    id: "email",
+                    placeholder: "Email",
+                    required: ""
+                  },
                   domProps: { value: _vm.email },
                   on: {
                     input: function($event) {
@@ -37725,7 +37737,12 @@ var render = function() {
                     }
                   ],
                   staticClass: "c-input",
-                  attrs: { type: "password", id: "password", placeholder: "" },
+                  attrs: {
+                    type: "password",
+                    id: "password",
+                    placeholder: "Password",
+                    required: ""
+                  },
                   domProps: { value: _vm.password },
                   on: {
                     input: function($event) {
@@ -54360,7 +54377,7 @@ var routes = [{
   path: '/home',
   component: _components_App_layout_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
   children: [{
-    path: '/suppliers',
+    path: '',
     name: 'app.suppliers',
     component: function component() {
       return __webpack_require__.e(/*! import() | events */ "events").then(__webpack_require__.bind(null, /*! ./components/Suppliers */ "./resources/js/components/Suppliers.vue"));
@@ -54378,7 +54395,7 @@ var routes = [{
       return __webpack_require__.e(/*! import() | events */ "events").then(__webpack_require__.bind(null, /*! ./components/Orders */ "./resources/js/components/Orders.vue"));
     }
   }, {
-    path: '',
+    path: '/suppliers/:id',
     name: 'app.supplier.edit',
     props: true,
     component: function component() {

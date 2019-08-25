@@ -26,7 +26,7 @@ const routes = [
     {
         path: '/home', component: AppLayout, children: [
             {
-                path: '/suppliers',
+                path: '',
                 name: 'app.suppliers',
                 component: () => import(/* webpackChunkName: "events" */ './components/Suppliers')
             },
@@ -41,7 +41,7 @@ const routes = [
                 component: () => import(/* webpackChunkName: "events" */ './components/Orders')
             },
             {
-                path: '',
+                path: '/suppliers/:id',
                 name: 'app.supplier.edit',
                 props: true,
                 component: () => import(/* webpackChunkName: "events" */ './components/Supplier-edit'),

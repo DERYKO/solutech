@@ -40,7 +40,7 @@
         <div class="o-page__sidebar js-page-sidebar">
             <div class="c-sidebar">
                 <ul class="c-sidebar__list">
-                    <li class="c-sidebar__item"> <router-link class="c-sidebar__link " to="/suppliers">Suppliers</router-link> </li>
+                    <li class="c-sidebar__item"> <router-link class="c-sidebar__link "  :to="{ name: 'app.suppliers'}">Suppliers</router-link> </li>
                     <li class="c-sidebar__item"> <router-link class="c-sidebar__link" to="/products">Products</router-link> </li>
                     <li class="c-sidebar__item"> <router-link class="c-sidebar__link" to="/orders">Orders</router-link> </li>
                 </ul>
