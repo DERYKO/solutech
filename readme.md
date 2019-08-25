@@ -3,7 +3,7 @@ Instructions on installation
 1. git clone https://github.com/DERYKO/solutech
 2. composer update 
 3. npm install
-4. npm run dev
+4. cd /solutech && npm run dev
 5. php artisan migrate --seed
 6. php artisan passport:install
 7. cd /solutech
